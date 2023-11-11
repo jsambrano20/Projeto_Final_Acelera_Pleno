@@ -1,4 +1,4 @@
-# MENU MASTER
+# 🏆MENU MASTER🏆
 
 O Menu Master é uma aplicação criada com o propósito de simplificar os pedidos e o controle de um restaurante. 
 Esta aplicação oferece uma experiência conveniente, permitindo que os clientes realizem seus pedidos diretamente da sua mesa. 
@@ -40,4 +40,4 @@ Concluido
 
 ## Notas Adicionais
 
-Projeto Vencedor do Programa Acelera Pleno  - IMPACTA - ATOS
+Projeto Vencedor do Programa Acelera Pleno  - IMPACTA - ATOS 🏆
