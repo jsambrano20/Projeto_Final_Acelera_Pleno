@@ -1,0 +1,72 @@
+﻿@model IEnumerable<FrontMVC.Models.Pedido.PedidosMesa>;
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-5">Cupom</h1>
+        <br />
+        <div class="row">
+            <div class="col-12 mb-3">
+                <p>Data de emissão: @DateTime.Now</p>
+            </div>
+        </div>
+        @{
+            var firstItem = Model.First();
+        }
+        <div class="row">
+            <div class="col-12 mb-3">
+                <h3 class="text-center">CPF: @Html.DisplayFor(modelItem => firstItem.CPF)</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>DESCRIÇÃO</th>
+                            <th>QUANTIDADE</th>
+                            <th>VALOR</th>
+                            <th>TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Select(p => new
+                        {
+                            Prato = p.DescPrato,
+                            Qtd = p.Quantidade,
+                            VlUnit = p.Valor / p.Quantidade,
+                            VlTotal = p.Valor
+                        }))
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Prato)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Qtd)</td>
+                                <td>R$ @Html.DisplayFor(modelItem => item.VlUnit)</td>
+                                <td>R$ @Html.DisplayFor(modelItem => item.VlTotal)</td>
+                            </tr>
+                        }
+                        @foreach (var item in Model.GroupBy(c => c.CPF).Select(g => new { Valor = g.Sum(c => c.Valor) }))
+                        {
+                            <tr>
+                                <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                                <td><strong>R$ @Html.DisplayFor(modelItem => item.Valor)</strong></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

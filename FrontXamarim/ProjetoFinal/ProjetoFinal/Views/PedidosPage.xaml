@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProjetoFinal.Views.PedidosPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:ProjetoFinal.ViewModels"  
+             xmlns:model="clr-namespace:ProjetoFinal.Models"  
+             x:Name="PedidosItemsPage">
+
+    <!--<ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
+    </ContentPage.ToolbarItems>-->
+
+    <RefreshView x:DataType="local:PedidosViewModel" Command="{Binding LoadPedidoCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+        <CollectionView x:Name="PedidosListView"
+                ItemsSource="{Binding Items}"
+                SelectionMode="Single" >
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Horizontal" x:DataType="model:Pedido">
+                        <Label Text="{Binding Id}" IsVisible="false"/>
+                        <Label Style="{DynamicResource ListItemTextStyle}"
+                               HorizontalOptions="Center" VerticalOptions="Center"
+                               Margin="10">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Mesa" FontAttributes="Bold" FontSize="20" />
+                                    <Span Text="&#x0a;" />
+                                    <Span Text="{Binding Mesas.Descricao}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label  Style="{DynamicResource ListItemTextStyle}" HorizontalOptions="Center"
+                               VerticalOptions="Center" >
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Prato" FontAttributes="Bold" FontSize="20" />
+                                    <Span Text="&#x0a;" />
+                                    <Span Text="{Binding Pratos.Titulo}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label Style="{DynamicResource ListItemTextStyle}" 
+                               HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="    Quantidade" FontAttributes="Bold" FontSize="20"/>
+                                    <Span Text="&#x0a;" />
+                                    <Span Text="{Binding Quantidade, StringFormat='                 {0}'}"  />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Button Text="ENTREGAR" Padding="20,20,20,20"
+                                HorizontalOptions="EndAndExpand"
+                                TextColor="#fff" Margin="5" FontSize="12"
+                                Command="{Binding BindingContext.EntregarCommand, Source={x:Reference PedidosListView}}" 
+                                CommandParameter="{Binding .}"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
+</ContentPage>

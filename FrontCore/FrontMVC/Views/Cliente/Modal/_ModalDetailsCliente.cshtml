@@ -1,0 +1,76 @@
+﻿<!-- Modal -->
+<div class="modal fade" id="detailsModalCliente" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabelCliente" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="wrapper">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailsModalLabelCliente">Detalhes</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="card card-2">
+                    <div class="card-heading3">
+                        <div class="modal-body">
+
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <label>Nome: </label>
+                                    <label name="nome" id="codNome"></label>
+                                </li>
+                                <li class="list-group-item">
+                                    <label>Id: </label>
+                                    <label name="cod" id="codNicolas"></label>
+                                </li>
+                                <li class="list-group-item">
+                                    <label>CPF: </label>
+                                    <label name="cpf" id="codDougras"></label>
+                                </li>
+                                <li class="list-group-item">
+                                    <label>Data Inclusão: </label>
+                                    <label name="dtinc" id="coddtinc"></label>
+                                </li>
+                                <li class="list-group-item">
+                                    <label>Data Alteração: </label>
+                                    <label name="dtinc" id="coddtalt"></label>
+                                </li>
+                            </ul>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#detailsModalCliente').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+
+        var varNome = button.data('nome');
+        var varId = button.data('cod');
+        var varCpf = button.data('mcpf');
+        var varDtInc = button.data('dtinc').toString();
+        var varDtAlt = button.data('dtalt').toString();
+
+        console.log(varId);
+        console.log(varCpf);
+        console.log(varDtInc);
+        console.log(varDtAlt);
+        
+        
+        $("#codNome").text(varNome);
+        $("#codNicolas").text(varId);
+        $("#codDougras").text(varCpf);
+        $("#coddtinc").text(varDtInc);
+        $("#coddtalt").text(varDtAlt);
+    });
+</script>
+

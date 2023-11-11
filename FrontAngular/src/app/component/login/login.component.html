@@ -1,0 +1,17 @@
+<form (ngSubmit)="submitForm()">
+  <div id="notlogado" *ngIf="!logado" class="input-group input-group-sm mb-3">
+    <!-- <label for="cpf">CPF</label> -->
+    <input type="text" id="cpf" name="cpf" [(ngModel)]="cpf" class="form-control" placeholder="CPF" />
+    <button type="submit" class="btn btn-outline-secondary" style="height: 33px;">Entrar</button>
+  </div>
+  <div class="col" id="logado" *ngIf="logado">
+    <div class="col-sm-12">
+      <div *ngFor="let item of mesas">
+        <label style="color: white;" for="cpf">{{item.clientes.cpf}}</label>
+        <br />
+        <label style="color: white;" for="nome">{{item.clientes.nome}}</label>
+      </div>
+    </div>
+  </div>
+</form>
+

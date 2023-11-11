@@ -1,0 +1,24 @@
+
+# Define a imagem base
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+
+# Define o diretório de trabalho dentro do container
+WORKDIR /app
+
+# Copia os arquivos do projeto para o diretório de trabalho
+COPY ./AceleraPleno.API/*.csproj ./
+
+# Restaura as dependências do projeto
+RUN dotnet restore
+
+# Copia o resto do código-fonte para o diretório de trabalho
+COPY ./AceleraPleno.API ./
+
+# Publica o aplicativo em um ambiente de produção
+RUN dotnet publish -c Release -o out
+
+# Define a imagem base final para executar o aplicativo
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+WORKDIR /app
+COPY --from=build-env /app/out .
+ENTRYPOINT ["dotnet", "AceleraPleno.API.dll"]

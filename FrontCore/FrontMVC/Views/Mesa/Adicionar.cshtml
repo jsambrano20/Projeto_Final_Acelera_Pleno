@@ -1,0 +1,54 @@
+﻿@model FrontMVC.Models.Mesa.MesaIncluir
+
+@{
+    ViewData["Title"] = "Cadastrar";
+}
+
+<div class="wrapper wrapper--w960">
+    <div class="card card-2">
+        <div class="card-heading2"></div>
+        <div class="card-body">
+            <h2 class="title">Cadastro de Mesa</h2>
+            <form asp-action="Adicionar" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="input-group">
+                    <input class="input--style-2" type="text" placeholder="Descricao" asp-for="Descricao"
+                           data-val="true" data-val-required="Por favor, insira uma Descricao">
+                    <span asp-validation-for="Descricao" class="text-danger"></span>
+                </div>
+                <div class="input-group">
+                    <input class="input--style-2" type="number" placeholder="Lugares" asp-for="Lugares"
+                           data-val="true" data-val-required="Por favor, insira a quantidades de Lugares">
+                    <span asp-validation-for="Lugares" class="text-danger"></span>
+                </div>
+                <div class="input-group">
+                    <input class="input--style-2" type="text" placeholder="Ambiente" asp-for="Ambiente"
+                           data-val="true" data-val-required="Por favor, insira um Ambiente">
+                    <span asp-validation-for="Ambiente" class="text-danger"></span>
+                </div>
+                <div class="input-group">
+                    <select asp-for="StatusMesa" class="form-control">
+                        <option value="1">Disponivel</option>
+                        <option value="2">Indisponivel</option>
+                        <option value="3">Reservado</option>
+                    </select>
+                    <span asp-validation-for="StatusMesa" class="text-danger"></span>
+                </div>
+                <div class="p-t-30">
+                    <input type="submit" value="Salvar" class="btn btn--radius btn--green" />
+                </div>
+                <br />
+                <div class="text-center">
+                    <a asp-action="Index">Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

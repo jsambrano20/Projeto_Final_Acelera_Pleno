@@ -1,0 +1,11 @@
+<div class="" *ngFor="let item of pedidos">
+  <div class="blog-box">
+    <figure><img src="data:image/jpeg;base64,{{ item.pratos.foto }}" /></figure>
+    <div class="travel">
+      <span>{{ item.pratos.descricao }}</span>
+    </div>
+    <h3>R$: {{ item.pratos.valor }}</h3>
+    <p>{{ item.quantidade }}</p>
+    <button (click)="Cancelar(item.id)">Cancelar</button>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+﻿<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Deseja realizar a ação <span id="modal-action-title"></span>?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Deseja realizar essa ação.
+            </div>
+            <div class="modal-footer">
+                <form id="myForm" method="post" asp-action="">
+                    <input type="hidden" name="id" id="codId" value="" />
+                    <input type="hidden" name="status" id="codStatus" value="" />
+                    <input type="hidden" name="cpf" id="codCpf" value="" />
+                    <button type="submit" class="btn btn-primary">Sim</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
+        var status = button.data('status');
+        var cpf = button.data('cpf');
+        var action = button.data('action');
+        var title = button.data('title');
+        $("#codId").val(id);
+        $("#codStatus").val(status);
+        $("#codCpf").val(cpf);
+        $('#myForm').attr('action', action);
+        $('#modal-action-title').html(title);
+    });
+</script>

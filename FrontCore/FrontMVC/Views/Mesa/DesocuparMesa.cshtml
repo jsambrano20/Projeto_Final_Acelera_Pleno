@@ -1,0 +1,102 @@
+﻿@model IEnumerable<FrontMVC.Models.Pedido.PedidosMesa>
+
+@{
+    ViewData["Title"] = "DesocuparMesa";
+    string serializedData = ViewData["lista"] as string;
+}
+
+<div class="wrapper wrapper--w960">
+    <div class="card card-2">
+        <div class="card-heading2 no-print"></div>
+        <div class="card-body">
+            @{
+                var firstItem = Model.FirstOrDefault();
+                if (firstItem != null)
+                {
+                    <h1 style="align-items: center">@Html.DisplayFor(modelItem => firstItem.DescMesa)</h1>
+                    <br />
+                    <h5 style="align-items: center">@Html.DisplayFor(modelItem => firstItem.Nome)</h5>
+                    <br />
+                    <hr />
+                }
+            }
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DescPrato)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Quantidade)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Valor)
+                        </th>
+                        <th>
+                            Total
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Select(p => new
+                    {
+                        Prato = p.DescPrato,
+                        Qtd = p.Quantidade,
+                        VlUnit = p.Valor / p.Quantidade,
+                        VlTotal = p.Valor
+                    }))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Prato)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Qtd)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.VlUnit)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.VlTotal)
+                            </td>
+                        </tr>
+                    }
+                    @foreach (var item in Model.GroupBy(c => c.CPF).Select(g => new { Valor = g.Sum(c => c.Valor) }))
+                    {
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Valor)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <br />
+            <div class="text-center">
+                <form method="post" action="@Url.Action("GerarPdf", "Comprovante")">
+                    <input type="hidden" name="model" value='@Json.Serialize(Model)' />
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-file-arrow-down"></i>
+                    </button>
+                </form>
+            </div>
+            <br />
+            <br />
+            <div class="text-center">
+                <a asp-action="Index">Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function printPage() {
+            window.print();
+        }
+
+    </script>
+}

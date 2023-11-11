@@ -1,0 +1,79 @@
+﻿<!-- Modal -->
+<div class="modal fade" id="detailsModalMesa" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabelMesa" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="wrapper">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailsModalLabelMesa">Detalhes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            
+                <div class="card card-2">
+                    <div class="card-heading2">
+                        <div class="modal-body">
+
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <label>Descrição: </label> <label name="descricao" id="coddesc"></label>
+                                </li>
+                                <li class="list-group-item">
+                                    <label>Lugares: </label> <label name="qtlugares" id="codQtLugares"></label>
+                                </li>
+                                <li class="list-group-item">
+                                    <label>Ambiente: </label><label name="ambiente" id="codAmbiente"></label>
+                                </li>
+                                <li class="list-group-item">
+                                    <label>Status: </label><label name="status" id="codsts"></label>
+                                </li>
+                                <li class="list-group-item">
+                                    <label>Ocupada: </label> <label name="ocupada" id="codOcupada"></label>
+                                </li>
+                                <li class="list-group-item">
+                                    <label>Nome do Cliente: </label> <label name="clientenome" id="codClienteNome"></label>
+                                </li>
+                                <li class="list-group-item">
+                                    <label>CPF do Cliente: </label> <label name="clientecpf" id="codclicpf"></label>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+    <script>
+        $('#detailsModalMesa').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+
+            var desc = button.data('descricao');
+            var lugares = button.data('qtlugares');
+            var ambiente = button.data('ambiente');
+            var status = button.data('status');
+            var ocupada = button.data('ocupada');
+            var clientenome = button.data('clientenome');
+            var clientecpf = button.data('clientecpf');
+
+            if (ocupada == "True") {
+                ocupada = "Sim"
+            } else {
+                ocupada = "Não"
+            }
+            $("#coddesc").text(desc);
+            $("#codQtLugares").text(lugares);
+            $("#codAmbiente").text(ambiente);
+            $("#codsts").text(status);
+            $("#codOcupada").text(ocupada);
+            $("#codClienteNome").text(clientenome);
+            $("#codclicpf").text(clientecpf);
+
+        });
+    </script>

@@ -1,0 +1,129 @@
+﻿@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common;
+@model IPagedList<FrontMVC.Models.Mesa.MesaModel>
+
+
+@{
+    ViewData["Title"] = "Index";
+
+}
+
+<div class="boxWhite" align="center">
+    <h1>Lista de Mesas</h1>
+    <a asp-action="Adicionar" class="btn btn-sm btn-default">
+        <i class="fa-solid fa-pen-to-square fa-sm" style="color: #dd711a;">Adicionar de Mesa</i>
+    </a>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+
+                <th class="text-center">
+                    Descrição
+                </th>
+                <th class="text-center">
+                    Lugares
+                </th>
+                <th class="text-center">
+                    Nome Cliente
+                </th>
+                <th class="text-center">
+                    CPF
+                </th>
+                <th class="text-center">
+                    Ocupada
+                </th>
+                <th class="text-center">
+                    Ambiente
+                </th>
+                <th class="text-center">
+                    Status da Mesa
+                </th>
+                <th class="text-center"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Descricao)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Lugares)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Clientes.Nome)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Clientes.CPFConvertido)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Ocupada)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Ambiente)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.StatusMesa)
+                    </td>
+                    <td class="text-center">
+                        @{
+                            var x = item.Ocupada ? "Desocupar" : "Ocupar";
+                        }
+
+                        <a asp-action="Alterar" asp-route-id="@item.Id" class="btn btn-sm btn-default">
+                            <i class="fa-solid fa-pen fa-xl" style="color: #264d92;"></i>
+                        </a>
+                        <a data-toggle="modal" data-target="#detailsModalMesa" data-descricao="@item.Descricao" data-qtlugares="@item.Lugares"
+                       data-ambiente="@item.Ambiente" data-status="@item.StatusMesa" data-ocupada="@item.Ocupada"
+                       data-clientenome="@item.Clientes?.Nome" data-clientecpf="@item.Clientes?.CPFConvertido" class="btn btn-sm btn-default">
+                            <i class="fa-solid fa-circle-info fa-xl" style="color: #264d92;"></i>
+                        </a>
+                        @if (item.StatusMesa == FrontMVC.Models.Enuns.StatusMesa.Reservado || item.StatusMesa == FrontMVC.Models.Enuns.StatusMesa.Indisponivel)
+                        {
+                            <a class="btn btn-sm btn-default">
+                                <i class="fa-solid fa-chair fa-xl" style="color: #e60505;"></i>
+                            </a>
+                        }
+                        else if (!item.Ocupada)
+                        {
+                            <a asp-action="OcuparMesa" asp-route-id="@item.Id" class="btn btn-sm btn-default">
+                                <i class="fa-solid fa-chair fa-xl" style="color: #039126;"></i>
+                            </a>
+
+                        }
+                        else
+                        {
+                            <a type="button" data-toggle="modal" data-target="#exampleModal"
+                               data-id="@item.Id" data-cpf="@item.Clientes.CPF" data-status="@item.Ocupada" data-action="Mesa/DesocuparMesa"
+                       data-title="desocupar mesa" class="btn btn-sm btn-default">
+                                <i class="fa-solid fa-chair fa-xl" style="color: #eb7d00;"></i>
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+<div class="pager-container">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions {
+        ContainerDivClasses = new[] { "pagination", "justify-content-center" },
+        UlElementClasses = new[] { "pagination" },
+        LiElementClasses = new[] { "page-item" },
+        PageClasses = new[] { "page-link" }
+    })
+</div>
+</div>
+@section Scripts {
+    <script>
+        $(function () {
+            var message = '@TempData["MsgAlert"]'
+            if (message.includes("Mesa alterada sucesso!"))
+                alertify.success(message);
+            else if (message != '')
+                alertify.error(message);
+        });
+    </script>
+}

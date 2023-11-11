@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Menu Master - Administração";
+}
+
+
+<div class="container">
+    <h1 class="text-center" style="color:black">
+        Manutenção da Aplicação Menu Master
+    </h1>
+    <br />
+    <h4 class="text-center" style="color:black">
+        Foi desenvolvida para realizar as manutenções dos Modulos de Cliente, Mesa, Prato e visualização de Log's
+    </h4>
+    <br />
+    <br />
+    <div class="ContainerHome">
+
+        <a asp-controller="Cliente" asp-action="Index" class="ancora" style="text-decoration: none; width: 250px">
+            <div class="card text-white text-center mb-3" style="background-color:rgb(32, 75, 107); max-width: 18rem;">
+                <div class="card-header" style="background-color:rgb(37,88,126)">Clientes</div>
+                <div class="card-body">
+                    <i style="font-size: 700%" class="fa-solid fa-people-group"></i>
+                </div>
+            </div>
+        </a>
+
+        <a asp-controller="Mesa" asp-action="Index" class="ancora" style="text-decoration: none; width: 250px">
+            <div class="card text-white text-center mb-3" style="background-color:rgb(32, 75, 107); max-width: 18rem;">
+                <div class="card-header" style="background-color:rgb(37,88,126)">Mesa</div>
+                <div class="card-body">
+                    <i style="font-size: 700%" class="fa-solid fa-chair"></i>
+                </div>
+            </div>
+        </a>
+
+        <a asp-controller="Prato" asp-action="Index" class="ancora" style="text-decoration: none; width: 250px">
+            <div class="card text-white text-center mb-3" style="background-color:rgb(32, 75, 107); max-width: 18rem;">
+                <div class="card-header" style="background-color:rgb(37,88,126)">Prato</div>
+                <div class="card-body">
+                    <i style="font-size: 700%" class="fa-solid fa-bowl-food"></i>
+                </div>
+            </div>
+        </a>
+
+        <a asp-controller="Log" asp-action="Index" class="ancora" style="text-decoration: none; width: 250px">
+            <div class="card text-white text-center mb-3" style="background-color:rgb(32, 75, 107); max-width: 18rem;">
+                <div class="card-header" style="background-color:rgb(37,88,126)">Logs</div>
+                <div class="card-body">
+                    <i style="font-size: 700%" class="fa-solid fa-gear"></i>
+                </div>
+            </div>
+        </a>
+
+    </div>
+</div>

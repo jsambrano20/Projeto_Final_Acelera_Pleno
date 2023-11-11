@@ -1,0 +1,86 @@
+﻿@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common;
+@model IPagedList<FrontMVC.Models.Cliente.ClienteModel>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="boxWhite" align="center">
+    <h1>Lista de Clientes</h1>
+    <a asp-action="Adicionar" class="btn btn-sm btn-default">
+        <i class="fa-solid fa-pen-to-square fa-sm" style="color: #dd711a;">Adicionar um Novo Cliente</i>
+    </a>
+    @using (Html.BeginForm("Index", "Cliente", FormMethod.Get))
+    {
+        <div class="ContainerFormCR">
+            <div class="input-group">
+                <input class="form-control" @*id="cpf"*@ name="like" autocomplete="off" />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">
+                        <i class="fa-solid fa-magnifying-glass" style="color: #264d92;"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">
+                    Nome
+                </th>
+                <th class="text-center">
+                    CPF
+                </th>
+                <th class="text-center">Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td class="text-center">
+                        @*@string.Format(new CultureInfo("pt-BR"), "{0:###.###.###-##}", item.CPF)*@
+                        @Html.DisplayFor(modelItem => item.CPFConvertido)
+                    </td>
+                    <td class="text-center">
+                        <a asp-action="Alterar" asp-route-id="@item.Id" class="btn btn-sm btn-default">
+                            <i class="fa-solid fa-pen fa-xl" style="color: #264d92;"></i>
+                        </a> |
+                        <a data-toggle="modal" data-target="#detailsModalCliente" data-nome="@item.Nome" data-cod="@item.Id"
+                       data-dtinc="@item.DataInclusao" data-dtalt="@item.DataAlteracao" data-mcpf="@item.CPFConvertido" class="btn btn-sm btn-default">
+                            <i class="fa-solid fa-circle-info fa-xl" style="color: #264d92;"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="pager-container">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions {
+        ContainerDivClasses = new[] { "pagination", "justify-content-center" },
+        UlElementClasses = new[] { "pagination" },
+        LiElementClasses = new[] { "page-item" },
+        PageClasses = new[] { "page-link" }
+        })
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $(function () {
+            var message = '@TempData["MsgAlert"]'
+            if (message.includes("Sucesso"))
+                alertify.success(message);
+            else if (message != '')
+                alertify.error(message);
+        });
+
+    </script>
+
+}

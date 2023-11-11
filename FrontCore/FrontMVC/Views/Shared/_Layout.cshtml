@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    @*    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    *@
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <title>@ViewData["Title"] - FrontMVC</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/FrontMVC.styles.css" asp-append-version="true" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="~/css/alertify.min.css" />
+    <link rel="stylesheet" href="~/css/themes/default.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+
+
+    <!-- Icons font CSS-->
+    <link href="~/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="~/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="~/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="~/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+    <link href="~/css/main.css" rel="stylesheet" media="all">
+
+    <!-- Mascara CPF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+
+</head>
+<body>
+    <header>
+
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow">
+            <div class="container-fluid justify-content: space-around">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"><i class="fa-list-ul"></i></span>
+                </button>
+                <div class="divLogoUsuario">
+                    <a asp-controller="Home" asp-action="Index"><img style="max-width: 50px" src="~/images/logo.png" /></a>
+                </div>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <ul class="navbar-nav flex-grow-1 d-flex align-items-center">
+                            <li class="nav-item">
+                                <a asp-area="" asp-controller="Cliente" asp-action="Index">Cliente</a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-area="" asp-controller="Mesa" asp-action="Index">Mesa</a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-area="" asp-controller="Prato" asp-action="Index">Prato</a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-area="" asp-controller="Log" asp-action="Index">Log</a>
+                            </li>
+                        </ul>
+                    }
+                </div>
+                <div>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main role="main" class="pb-3" style="padding-bottom: 20% !important;">
+        <div class="container">
+            @RenderBody()
+            <partial name="_Modal" />
+            <partial name="~/Views/Prato/Modal/_ModalDetails.cshtml" />
+            <partial name="~/Views/Mesa/Modal/_ModalDetailsMesa.cshtml" />
+            <partial name="~/Views/Cliente/Modal/_ModalDetailsCliente.cshtml" />
+            <partial name="~/Views/Log/Modal/_ModalDetailsLog.cshtml" />
+
+        </div>
+    </main>
+
+
+
+    <footer class="border-top footer text-muted">
+        <div class="container-fluid rodape p-3 text-center">
+
+            <div class="row text-center">
+                <div class="col-md-4 box">
+                    <span class="copyright quick-links" style="color:white">
+                        Copyright &copy; Menu Master - @DateTime.Now.Year
+                    </span>
+                </div>
+                <div class="col-md-4 box">
+                    <ul class="list-inline social-buttons">
+                        <li class="list-inline-item">
+                            <a href="https://github.com/djnacelera">
+                                <i class="fab fa-github fa-xl"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4 box">
+                    <ul class="list-inline quick-links">
+                        <li class="list-inline-item">
+                            <a href="https://www.linkedin.com/in/douglasvaguiar/">
+                                Douglas Aguiar
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://www.linkedin.com/in/nicolas-capelari/">
+                                Nicolas Capelari
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://www.linkedin.com/in/joao-sambrano/">
+                                João Sambrano
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CPF-->
+    <script src="~/js/maskaras.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/alertify.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="~/vendor/select2/select2.min.js"></script>
+    <script src="~/vendor/datepicker/moment.min.js"></script>
+    <script src="~/vendor/datepicker/daterangepicker.js"></script>
+
+    <!-- Main JS-->
+    <script src="~/js/global.js"></script>
+
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

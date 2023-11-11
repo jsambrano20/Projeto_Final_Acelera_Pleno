@@ -1,0 +1,61 @@
+﻿<!-- Modal -->
+<div class="modal fade" id="detailsModalLog" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabelLog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="wrapper">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailsModalLabelLog">Detalhes</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <label>Tabela: </label>
+                            <label name="tabela" id="codTabela"></label>
+                        </li>
+                        <li class="list-group-item">
+                            <label>Ação: </label>
+                            <label name="acao" id="codAcao"></label>
+                        </li>
+                        <li class="list-group-item">
+                            <label>Id Tabela: </label>
+                            <label name="tabelaid" id="codIdTabela"></label>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $('#detailsModalLog').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+
+        var tabela = button.data('tabela');
+        var funcionario = button.data('funcionario');
+        var acao = button.data('acao');
+        var tabelaid = button.data('tabelaid');
+
+        console.log(tabela);
+        console.log(funcionario);
+        console.log(acao);
+        console.log(tabelaid);
+
+        $("#codTabela").text(tabela);
+        $("#codFuncionario").text(funcionario);
+        $("#codAcao").text(acao);
+        $("#codIdTabela").text(tabelaid);
+    });
+</script>
+

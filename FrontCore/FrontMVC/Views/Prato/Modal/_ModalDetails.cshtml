@@ -1,0 +1,66 @@
+﻿<!-- Modal -->
+<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailsModalLabel">Detalhes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group">
+                    <img name="foto" id="codFoto" src="" alt="Foto do item" />
+                    <li class="list-group-item">
+                        <label name="titulo" id="codTitulo"></label>
+                    </li>
+                    <li class="list-group-item">
+                        <label name="descricao" id="codDescricao"></label>
+                    </li>
+                    <li class="list-group-item">
+                        <label name="sts" id="codSts"></label>
+                    </li>
+                    <li class="list-group-item">
+                        <label name="valor" id="codValor"></label>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#detailsModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var sts = button.data('sts');
+
+        var foto = button.data('foto');
+        var descricao = button.data('descricao');
+        var titulo = button.data('titulo');
+
+        var valor = button.data('valor');
+        var title = button.data('title');
+
+        var statustexto = "TESTE";
+
+        if (sts) {
+            statustexto = "Ativo";
+        }
+        else {
+            statustexto = "Inativo";
+        }
+
+        $("#codDescricao").text(descricao);
+        $("#codTitulo").text(titulo);
+        $("#codSts").text(statustexto);
+        $("#codValor").text(valor);
+
+        var base64String = "data:image/jpeg;base64," + foto;
+        $('#codFoto').attr('src', base64String);
+        $('#modal-action-title').html(title);
+    });
+</script>
+

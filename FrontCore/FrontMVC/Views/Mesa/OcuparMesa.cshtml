@@ -1,0 +1,95 @@
+﻿@model FrontMVC.Models.Mesa.OcuparMesa
+
+@{
+    ViewData["Title"] = "OcuparMesa";
+}
+<div class="wrapper wrapper--w960">
+    <div class="card card-2">
+        <div class="card-heading2"></div>
+        <div class="card-body">
+            <h1>Ocupar Mesa</h1>
+            <form asp-action="OcuparMesa">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Clientes.Id" id="clienteID" class="form-control" />
+                <input type="hidden" asp-for="Id" class="form-control" />
+
+                <div class="input-group">
+                    <input class="input--style-2" type="text" placeholder="Nome Cliente" asp-for="Clientes.Nome" id="nome"
+                           data-val="true" data-val-required="Por favor, insira o nome do Cliente">
+                    <span asp-validation-for="Clientes.Nome" class="text-danger"></span>
+                </div>
+                <div class="input-group">
+                    <input id="cpf" class="form-control" type="text" placeholder="CPF Cliente" asp-for="Clientes.CPF"
+                           data-val="true" data-val-required="Por favor, insira o CPF do Cliente">
+                    @if (Model.Clientes == null)
+                    {
+                        <a id="btnBuscar" name="btnBuscar" value="Buscar" class="btn btn-outline-secondary">
+                            <i class="fa-solid fa-magnifying-glass" style="color: #264d92;"></i>
+                        </a>
+
+                    }
+                </div>
+                <div class="input-group">
+                    <input class="input--style-2" type="text" placeholder="Descricao" asp-for="Descricao"
+                           data-val="true" data-val-required="Por favor, insira uma Descricao" disabled>
+                    <span asp-validation-for="Descricao" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Save" id="btnSalvar" class="btn btn-primary" disabled />
+                </div>
+
+
+            </form>
+            <br />
+            <div class="text-center">
+                <a asp-action="Index">Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+<script type="text/jscript">
+
+    $('#cpf').mask('000.000.000-00', { reverse: true });
+    var cpf = $("#cpf").val()
+    $(document).ready(function () {
+        $('#btnBuscar').on('click', function () {
+            cpf = $("#cpf").val()
+
+            $.ajax
+                ({
+                    contentType: "text/plain",
+                    url: '/Cliente/BuscarCpf',
+                    type: 'GET',
+                    data: { cpf },
+                    success: function (dados) {
+                        console.log(typeof (dados))
+                        if (dados !== undefined) {
+                            $("#clienteID").val(dados.id)
+                            $("#cpf").val(dados.cpf)
+                            $("#nome").val(dados.nome)
+                            $('#btnSalvar').removeAttr("disabled");
+
+                        } else {
+                            $("#nome").val("")
+                            alert("Cpf Não localizado");
+                            $('#btnSalvar').attr('disabled', 'disabled');
+                        }
+
+                        console.log(dados)
+                    },
+                    error: function (erro) {
+                        console.log(erro)
+
+                    }
+                });
+        });
+    });
+</script>

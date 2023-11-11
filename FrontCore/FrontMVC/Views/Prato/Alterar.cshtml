@@ -1,0 +1,108 @@
+﻿@model FrontMVC.Models.Prato.PratoModel
+
+@{
+    ViewData["Title"] = "Alterar";
+}
+<div class="wrapper wrapper--w960">
+    <div class="card card-2">
+        <div class="card-heading"></div>
+        <div class="card-body">
+            <h2 class="title">Alterar Prato</h2>
+            <form asp-action="Alterar" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id">
+                <div class="input-group">
+                    <input class="input--style-2" type="text" placeholder="Titulo" asp-for="Titulo"
+                           data-val="true" data-val-required="Por favor, insira um Titulo">
+                    <span asp-validation-for="Titulo" class="text-danger"></span>
+                </div>
+                <div class="input-group">
+                    <input class="input--style-2" type="text" placeholder="Descricao" asp-for="Descricao"
+                           data-val="true" data-val-required="Por favor, insira uma descrição">
+                    <span asp-validation-for="Descricao" class="text-danger"></span>
+                </div>
+                <div class="row row-space">
+                    <div class="col-2">
+                        <div class="input-group">
+                            <input asp-for="Valor" class="input--style-2" type="text" placeholder="Valor" data-val="true" data-val-required="Por favor, insira um valor" />
+                            <span asp-validation-for="Valor" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-space">
+                    <div class="col-5">
+                        <div class="input-group">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#preview-modal">Preview</button>
+                            <input type="hidden" asp-for="Foto" value=@Model.Foto />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-space">
+                    <div class="col-5">
+                        <div class="input-group">
+                            <label asp-for="FotoBase" class="control-label"></label>
+                            <input asp-for="FotoBase" class="input--style-2" type="file" data-val="false" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-space">
+                    <div class="col-2">
+                        <div class="input-group">
+                            <label asp-for="Status" class="control-label"></label>
+                            <input type="hidden" id="codStatus" asp-for="Status" value="@($"{Model.Status}".ToLower())" />
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-sm btn-toggle @(Model.Status ? "active" : "")" data-toggle="button"
+                                    aria-pressed="@($"{Model.Status}".ToLower())" autocomplete="off">
+                                <div class="handle"></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-t-30">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+                <br />
+            <div class="text-center">
+                <a asp-action="Index">Voltar</a>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal com o preview da imagem -->
+<div class="modal fade" id="preview-modal" tabindex="-1" role="dialog" aria-labelledby="preview-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img class="form-control" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Jpg)" width="100" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script>
+            var button = document.querySelector('.btn-toggle');
+            var hiddenInput = document.querySelector('#codStatus');
+
+            button.addEventListener('click', function () {
+                var pressed = button.getAttribute('aria-pressed') === 'true';
+                button.setAttribute('aria-pressed', pressed);
+                hiddenInput.value = !pressed;
+            });
+
+
+        </script>
+    }
+}

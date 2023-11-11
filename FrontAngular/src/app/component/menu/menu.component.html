@@ -1,0 +1,47 @@
+<!-- <section>
+  <div *ngFor="let item of pratos">
+    <div *ngIf="item.status">
+      <div>
+        <img src="data:image/jpeg;base64,{{ item.foto }}" />
+      </div>
+      <label>{{ item.titulo }}</label>
+      <label>{{ item.descricao }} </label>
+      <label>R$: {{ item.valor }}</label>
+      <button>Pedir</button>
+    </div>
+  </div>
+</section> -->
+<div id="blog" class="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="titlepage">
+          <h2>Menu Master</h2>
+          <span>Foi desenvolvido para os clientes realizarem os pedidos</span>
+        </div>
+      </div>
+    </div>
+    <div class="ContainerCard">
+      <div *ngFor="let item of pratos">
+        <div class="card text-white text-center mb-3" style="background-color:rgb(32, 75, 107); max-width: 18rem;">
+          <div class="card-header" style="background-color:rgb(37,88,126)"> {{ item.titulo }}</div>
+          <div class="blog-box" style="text-align: -webkit-center;">
+            <br>
+            <figure> <img src="data:image/jpeg;base64,{{ item.foto }}" style="width: 100px; height: 80px;" />
+            </figure>
+            <!-- <div class="travel">
+              <span>{{ item.titulo }}</span>
+            </div> -->
+            <br>
+            <p>{{ item.descricao }} </p>
+            <h5 style="color: mediumseagreen;">R$: {{ item.valor }}</h5>
+            <input type="number" name="quantidade" [value]="item.quantidade"
+              (change)="item.quantidade = quantidadeInput.value" #quantidadeInput class="form-control"
+              style="width: 80%; height: 10px;" />
+            <button (click)="RealizarPedido(item.id)" class="btn btn-secondary">Pedido</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

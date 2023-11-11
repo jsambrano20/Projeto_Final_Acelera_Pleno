@@ -1,0 +1,265 @@
+﻿@model IEnumerable<AceleraPlenoTrabalhoFinal.Mvc.Models.Pedido>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="boxWhite">
+    <h2>Pedidos</h2>
+    @*<hr />
+    <p>
+        @Html.ActionLink("Criar Novo", "Criar")
+    </p>*@
+</div>
+
+<hr />
+
+<div class="boxWhite">
+    <table class="table" style="text-align:center">
+        <thead style="text-align-last: center;">
+            <tr>
+                <td colspan="5" style="font-size:x-large; background:#B8DAFF">Recebido</td>
+            </tr>
+            <tr style="text-align:center">
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Observacao)
+                    </th>*@
+                <th>
+                    @*@Html.DisplayNameFor(model => model.MesaId)*@
+                    @Html.DisplayNameFor(model => model.Mesa)
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.PratoId)*@
+                    @Html.DisplayNameFor(model => model.Prato)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantidade)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.StatusPedido)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.DtRecebimento)
+                </th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.Where(p => p.StatusPedido == AceleraPlenoTrabalhoFinal.Mvc.Models.Enuns.StatusPedido.Recebido))
+            {
+                <tr>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Observacao)
+                        </td>*@
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.MesaId)*@
+                        @Html.DisplayFor(modelItem => item.Mesa)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.PratoId)*@
+                        @Html.DisplayFor(modelItem => item.Prato)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantidade)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.StatusPedido)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DtRecebimento)
+                    </td>
+                    <td>
+                        <a onclick="Preparar('@item.Id')" class="btn btn-sm btn-default">
+                            <i class="fa fa-hourglass-start"></i> Preparar
+                        </a> |
+
+                        <a onclick="Cancelar('@item.Id')" class="btn btn-sm btn-default">
+                            <i class="fa fa-hourglass-end"></i> Cancelar
+                        </a>
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="5"></td>
+            </tr>
+        </tbody>
+        <thead style="text-align-last: center;">
+            <tr>
+                <td colspan="5" style="font-size:x-large; background:#FFEEBA">Preparando</td>
+            </tr>
+            <tr style="text-align:center">
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Observacao)
+                    </th>*@
+                <th>
+                    @*@Html.DisplayNameFor(model => model.MesaId)*@
+                    @Html.DisplayNameFor(model => model.Mesa)
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.PratoId)*@
+                    @Html.DisplayNameFor(model => model.Prato)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantidade)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.StatusPedido)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.DtRecebimento)
+                </th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.Where(p => p.StatusPedido == AceleraPlenoTrabalhoFinal.Mvc.Models.Enuns.StatusPedido.Preparando))
+            {
+                <tr>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Observacao)
+                        </td>*@
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.MesaId)*@
+                        @Html.DisplayFor(modelItem => item.Mesa)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.PratoId)*@
+                        @Html.DisplayFor(modelItem => item.Prato)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantidade)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.StatusPedido)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DtRecebimento)
+                    </td>
+                    <td>
+                        <a onclick="Disponibilizar('@item.Id')" class="btn btn-sm btn-default">
+                            <i class="fa fa-hourglass-half"></i> Disponibilizar
+                        </a> |
+
+                        <a onclick="Cancelar('@item.Id')" class="btn btn-sm btn-default">
+                            <i class="fa fa-hourglass-end"></i> Cancelar
+                        </a>
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="5"></td>
+            </tr>
+        </tbody>
+        <thead style="text-align-last: center;">
+
+            <tr>
+                <td colspan="5" style="font-size:x-large; background-color:#C3E6CB">Disponivel</td>
+            </tr>
+            <tr style="text-align:center">
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Observacao)
+                    </th>*@
+                <th>
+                    @*@Html.DisplayNameFor(model => model.MesaId)*@
+                    @Html.DisplayNameFor(model => model.Mesa)
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.PratoId)*@
+                    @Html.DisplayNameFor(model => model.Prato)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantidade)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.StatusPedido)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.DtRecebimento)
+                </th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.Where(p => p.StatusPedido == AceleraPlenoTrabalhoFinal.Mvc.Models.Enuns.StatusPedido.Disponivel))
+            {
+                <tr>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Observacao)
+                        </td>*@
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.MesaId)*@
+                        @Html.DisplayFor(modelItem => item.Mesa)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.PratoId)*@
+                        @Html.DisplayFor(modelItem => item.Prato)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantidade)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.StatusPedido)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DtRecebimento)
+                    </td>
+                    <td>
+                        <a onclick="Preparar('@item.Id')" class="btn btn-sm btn-default">
+                            <i class="fa fa-hourglass-end"></i> Retornar
+                        </a> |
+
+                        <a onclick="Cancelar('@item.Id')" class="btn btn-sm btn-default">
+                            <i class="fa fa-hourglass-end"></i> Cancelar
+                        </a>
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+
+
+
+
+@section Scripts {
+    <script>
+
+        $(function(){
+            var successMessage = '@TempData["MsgSucesso"]'
+            if(successMessage != '')
+                alertify.success(successMessage);
+        });  /*Função para receber valor de MsgSucesso da Controller e tratar para Alertify*/
+
+        function Preparar(id) {
+            alertify.confirm('Alterar Status para Preparando', 'Confirmar alteração ?',function(){
+                window.location.href = '@Url.Action("Preparando","Pedido")/'+id;
+            },null );
+        }; /*Função para Modal de confirmação de exclusão */
+
+        function Disponibilizar(id) {
+            alertify.confirm('Alterar Status para Disponível', 'Confirmar alteração ?',function(){
+                window.location.href = '@Url.Action("Disponivel","Pedido")/'+id;
+            },null );
+        }
+
+        function Cancelar(id) {
+            alertify.confirm('Cancelar pedido', 'Confirmar cancelamento ?',function(){
+                window.location.href = '@Url.Action("Cancelado","Pedido")/'+id;
+            },null );
+        }
+    </script>
+}

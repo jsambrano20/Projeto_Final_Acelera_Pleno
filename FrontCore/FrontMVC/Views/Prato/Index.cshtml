@@ -1,0 +1,114 @@
+﻿@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common;
+@model IPagedList<FrontMVC.Models.Prato.PratoModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<div class="boxWhite" align="center">
+    <h1>Lista de Pratos</h1>
+    <a asp-action="Adicionar" class="btn btn-sm btn-default">
+        <i class="fa-solid fa-pen-to-square fa-sm" style="color: #dd711a;">Adicionar Novo Prato</i>
+    </a>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">
+                    Imagem
+                </th>
+                <th class="text-center">
+                    Titulo
+                </th>
+                <th class="text-center">
+                    Descrição
+                </th>
+                <th class="text-center">
+                    Valor
+                </th>
+                <th class="text-center">
+                    Ativar/Desativar
+                </th>
+                <th class="text-center">
+                    Ação
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @Html.HiddenFor(modelItem => item.Id)
+                    <td class="text-center">
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(item.Jpg)" width="100" height="80" />
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Titulo)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Descricao)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Valor)
+                    </td>
+                    <td class="text-center">
+                        @if (item.Status)
+                        {
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"
+                            data-id="@item.Id" data-status="@item.Status" data-action="Prato/InativarPrato"
+                            data-title="inativar prato">
+                                Desativar
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-success" data-toggle="modal"
+                            data-target="#exampleModal" data-id="@item.Id" data-status="@item.Status" data-action="Prato/AtivarPrato"
+                            data-title="ativar prato">
+                                Ativar
+                            </button>
+                        }
+                    </td>
+                    <td>
+                        <a data-toggle="modal" data-target="#exampleModal" data-id="@item.Id" data-action="Prato/Delete"
+                       data-title="deletar prato" class="btn btn-sm btn-default">
+                            <i class="fa-solid fa-trash fa-xl" style="color: #d73737;"></i>
+                        </a> |
+                        <a asp-action="Alterar" asp-route-id="@item.Id" class="btn btn-sm btn-default">
+                            <i class="fa-solid fa-pen fa-xl" style="color: #264d92;"></i>
+                        </a> |
+                        <a data-toggle="modal" data-target="#detailsModal" data-titulo="@item.Titulo" data-descricao="@item.Descricao" data-valor="@item.Valor"
+                       data-title="Detalhes" data-sts="@($"{item.Status}".ToLower())" data-foto="@item.Foto"
+                       class="btn btn-sm btn-default">
+                            <i class="fa-solid fa-circle-info fa-xl" style="color: #264d92;"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="pager-container">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions {
+        ContainerDivClasses = new[] { "pagination", "justify-content-center" },
+        UlElementClasses = new[] { "pagination" },
+        LiElementClasses = new[] { "page-item" },
+        PageClasses = new[] { "page-link" }
+        })
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            var message = '@TempData["MsgAlert"]'
+            if (message.includes("Sucesso"))
+                alertify.success(message);
+            else if (message != '')
+                alertify.error(message);
+        });
+    </script>
+}
