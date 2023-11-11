@@ -40,5 +40,4 @@ Concluido
 
 ## Notas Adicionais
 
-Inclua qualquer informação adicional que considere relevante para o seu projeto.
-
+Projeto Vencedor do Programa Acelera Pleno  - IMPACTA - ATOS
