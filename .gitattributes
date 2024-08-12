@@ -1,9 +1,12 @@
+# Marcar arquivos JavaScript como "vendidos"
+*.js linguist-vendored=true
+
+# Marcar arquivos CSS como "vendidos"
+*.css linguist-vendored=true
+
+# Definir arquivos C# para garantir que sejam contados
 *.cs linguist-language=C#
 *.cshtml linguist-language=C#
 *.csproj linguist-language=C#
 *.config linguist-language=C#
 *.sln linguist-language=C#
-
-# Marcar arquivos como "vendidos" se for o caso
-*.js linguist-vendored=true
-*.css linguist-vendored=true
