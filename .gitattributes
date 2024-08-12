@@ -1,2 +1,8 @@
-* linguist-vendored
-*.cs linguist-detectable=true
+*.cs linguist-language=C#
+*.cshtml linguist-language=C#
+*.csproj linguist-language=C#
+*.config linguist-language=C#
+*.sln linguist-language=C#
+*.dll linguist-vendored=true
+*.exe linguist-vendored=true
+*.png linguist-vendored=true
